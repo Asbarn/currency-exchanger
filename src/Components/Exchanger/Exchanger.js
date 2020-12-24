@@ -63,6 +63,7 @@ const currencies = ["CAD", "HKD", "ISK", "PHP", "DKK", "HUF", "CZK", "GBP", "RON
 export function Exchanger({ openHistory, setOpenHistory, openCheckout, setOpenCheckout }) {
     let rates = useSelector(state => state.rates);
     let maxValue = useSelector(state => state.maxValue);
+    let today = useSelector(state => state.today);
     let systemRates = useSelector(state => state.systemRates);
     let name = useSelector(state => state.name);
     let surname = useSelector(state => state.surname);
@@ -95,8 +96,9 @@ export function Exchanger({ openHistory, setOpenHistory, openCheckout, setOpenCh
 
     const [currencyValue, setCurrencyValue] = useState(0);
     const handleChangeCurrencyValue = (event) => {
-        if (event.target.value < 0) {setCurrencyValue(0);return}
-        if (event.target.value > maxValue){setCurrencyValue(maxValue);return}
+        if (event.target.value < 0) { setCurrencyValue(0); return }
+
+        if (event.target.value > maxValue) { setCurrencyValue(maxValue); return }
         else setCurrencyValue(event.target.value);
     };
 
@@ -117,7 +119,6 @@ export function Exchanger({ openHistory, setOpenHistory, openCheckout, setOpenCh
             type: "FETCH_MORE",
             buyingCurrency: buyingCurrency,
             sellingCurrency: sellingCurrency,
-            date: (new Date()).toISOString().substring(0, 10),
             value: currencyValue,
             buyingValue: (currencyValue * currency).toFixed(2),
             currency: currency,
@@ -196,8 +197,8 @@ export function Exchanger({ openHistory, setOpenHistory, openCheckout, setOpenCh
                 </div>
                 <div className={styles.dropdownContainer}>
                     <TextField
-                        id="outlined-number"
-                        label="Number"
+                        id="standard-number"
+                        label="How much do you want to trade?"
                         type="number"
                         min="0"
                         onChange={handleChangeCurrencyValue}

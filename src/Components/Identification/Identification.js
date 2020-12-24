@@ -78,7 +78,13 @@ export function Identification() {
                         name: `${ref.current.childNodes[1].childNodes[1].childNodes[0].value}`,
                         surname: `${ref.current.childNodes[0].childNodes[1].childNodes[0].value}`,
                         patronymic: `${ref.current.childNodes[2].childNodes[1].childNodes[0].value}`
-                    });                                      
+                    });  
+                    dispatch({
+                        type: 'FETCH_INIT',
+                        name: `${ref.current.childNodes[1].childNodes[1].childNodes[0].value}`,
+                        surname: `${ref.current.childNodes[0].childNodes[1].childNodes[0].value}`,
+                        patronymic: `${ref.current.childNodes[2].childNodes[1].childNodes[0].value}`
+                    });                                        
                     handleClose();
                 }}
             >
